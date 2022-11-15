@@ -26,6 +26,11 @@ jobs:
         id: install-kubectl
         uses: azure/setup-kubectl@v3
       - name: Deploy Nginx
-        run: kubectl apply -f deploy-blue.yaml && kubectl apply -f deploy-green.yaml
-      - name: Get LoadBalancer IP
-        run: kubectl get svc --selector=app=istio-ingressgateway -n istio-system -o jsonpath="{.items[0].status.loadBalancer.ingress[0].ip}"
+        run: |
+          echo "Create Namespace"
+          kubectl create namespace nginx-blue && kubectl create namespace nginx-green
+          echo "Istio Inject Enable"
+          kubectl label namespace nginx-blue istio-injection=enabled && kubectl label namespace nginx-green istio-injection=enabled
+          kubectl apply -f deploy-blue.yaml && kubectl apply -f deploy-green.yaml
+          echo "Istio LoadBalancer IP"
+          kubectl get svc --selector=app=istio-ingressgateway -n istio-system -o jsonpath="{.items[0].status.loadBalancer.ingress[0].ip}"

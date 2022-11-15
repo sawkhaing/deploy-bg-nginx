@@ -1,8 +1,10 @@
-name: build_deploy_aks
+name: deploy_aks
 on:
   push:
-    paths:
-      - "azure-vote/**"
+    branches: [ "main" ]
+  pull_request:
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest

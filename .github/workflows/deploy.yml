@@ -33,4 +33,4 @@ jobs:
           kubectl label namespace nginx-blue istio-injection=enabled && kubectl label namespace nginx-green istio-injection=enabled
           kubectl apply -f deploy-blue.yaml && kubectl apply -f deploy-green.yaml && kubectl apply -f gateway-vs.yaml
           echo "Istio LoadBalancer IP"
-          kubectl get svc --selector=app=istio-ingressgateway -n istio-system -o jsonpath="{.items[0].status.loadBalancer.ingress[0].ip}"
+          kubectl get svc --selector=app=istio-ingress -n istio-system -o jsonpath="{.items[0].status.loadBalancer.ingress[0].ip}"

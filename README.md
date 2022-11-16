@@ -15,3 +15,4 @@ For testing map the istio loadbalancer ip in '/etc/hosts'
 - Learn Istio gateway and virtualservice resources
 - Istio Injection on namespaces for service mesh
 - Istio Sidecar
+- Improvement! want to make a multicluster mesh
